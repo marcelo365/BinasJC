@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="azulBebe">#39C3EA</color>
+    <color name="azulFundoBotao">#2A88E7 </color>
+    <color name="azulFundoBotaoClicado">#04478A</color>
+    <color name="azulFundoMsg">#72BBFF</color>
+    <color name="cinza">#D7D7D7</color>
+    <color name="verde">#2ED600</color>
+    <color name="vermelho">#CC0000</color>
+</resources>
