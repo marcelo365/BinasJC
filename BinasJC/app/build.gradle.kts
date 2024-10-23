@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    //alias(libs.plugins.map.secret)
 }
 
 android {
@@ -36,8 +37,10 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
+    //implementation(libs.google.maps)
     implementation(libs.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
 }

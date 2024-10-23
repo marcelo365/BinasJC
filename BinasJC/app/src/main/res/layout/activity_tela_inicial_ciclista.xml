@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="irMinhaConta"
     tools:context=".TelaInicialCiclista">
 
     <LinearLayout
@@ -31,11 +30,10 @@
                 android:textAlignment="center">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/iconeConta"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:onClick="irMinhaConta"
                     app:srcCompat="@drawable/account_icon" />
 
                 <TextView
@@ -72,7 +70,8 @@
                     android:layout_width="34dp"
                     android:layout_height="41dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/message_icon" />
+                    android:onClick="irVisualizarMapa"
+                    app:srcCompat="@drawable/map_icon" />
             </LinearLayout>
 
         </LinearLayout>
@@ -146,7 +145,7 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/listaTrajectos"
+            android:id="@+id/listaObjectos"
             android:layout_width="match_parent"
             android:layout_height="559dp"
             android:layout_margin="20px" />

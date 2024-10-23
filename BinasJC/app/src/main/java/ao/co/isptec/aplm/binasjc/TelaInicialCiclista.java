@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -40,7 +41,17 @@ public class TelaInicialCiclista extends AppCompatActivity {
             return insets;
         });
 
-        listaObjectos = findViewById(R.id.listaTrajectos);
+        ImageView iconeConta = findViewById(R.id.iconeConta);
+        iconeConta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TelaInicialCiclista.this , MinhaConta.class);
+                startActivity(intent);
+            }
+        });
+
+
+        listaObjectos = findViewById(R.id.listaObjectos);
         btnBicicletas = findViewById(R.id.btnBicicletas);
         btnCiclistas = findViewById(R.id.btnCiclistas);
         btnEstacoes = findViewById(R.id.btnEstacoes);
@@ -70,7 +81,6 @@ public class TelaInicialCiclista extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
 
@@ -123,8 +133,8 @@ public class TelaInicialCiclista extends AppCompatActivity {
     }
 
 
-    public void irMinhaConta(View view){
-        Intent intent = new Intent(this , MinhaConta.class);
+    public void irVisualizarMapa(View view){
+        Intent intent = new Intent(this , TelaMapa.class);
         startActivity(intent);
     }
 

@@ -1,6 +1,7 @@
 package ao.co.isptec.aplm.binasjc;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -29,5 +30,9 @@ public class VisualizarCiclista extends AppCompatActivity {
         nomeCiclista = findViewById(R.id.ciclista);
         nomeCiclista.setText(usuario.getNome());
 
+    }
+
+    public void voltar(View view) {
+        finish();
     }
 }

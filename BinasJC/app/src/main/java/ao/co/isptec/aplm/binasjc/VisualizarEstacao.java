@@ -60,4 +60,8 @@ public class VisualizarEstacao extends AppCompatActivity {
 
 
     }
+
+    public void voltar(View view) {
+        finish();
+    }
 }
