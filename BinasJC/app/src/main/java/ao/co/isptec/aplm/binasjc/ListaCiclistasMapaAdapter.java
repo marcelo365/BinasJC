@@ -12,16 +12,19 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class ListaCiclistasMapaAdapter extends ArrayAdapter<Usuario> {
+import ao.co.isptec.aplm.binasjc.model.Utilizador;
+import okhttp3.internal.Util;
 
-    public ListaCiclistasMapaAdapter(@NonNull Context context, ArrayList<Usuario> listaCiclistas) {
+public class ListaCiclistasMapaAdapter extends ArrayAdapter<Utilizador> {
+
+    public ListaCiclistasMapaAdapter(@NonNull Context context, ArrayList<Utilizador> listaCiclistas) {
         super(context, R.layout.item_lista_ciclistas_mapa, listaCiclistas);
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Usuario ciclista = getItem(position);
+        Utilizador ciclista = getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_lista_ciclistas_mapa, parent, false);
@@ -30,7 +33,7 @@ public class ListaCiclistasMapaAdapter extends ArrayAdapter<Usuario> {
         TextView nomeCiclista = convertView.findViewById(R.id.nomeCiclista);
 
 
-        nomeCiclista.setText(ciclista.getNome().toString());
+        nomeCiclista.setText(ciclista.getUsername().toString());
 
         return convertView;
     }

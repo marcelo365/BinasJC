@@ -2,5 +2,5 @@
     <string name="app_name">BinasJC</string>
     <string name="p_estacao">Pesquise uma estação</string>
     <string name="p_bicicleta">Pesquise uma bicicleta</string>
-    <string name="p_ciclista">Pesquise um ciclista</string>
+    <string name="p_ciclista">Pesquise um ciclista pelo username</string>
 </resources>

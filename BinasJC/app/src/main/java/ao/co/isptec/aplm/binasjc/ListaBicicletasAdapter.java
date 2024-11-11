@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import ao.co.isptec.aplm.binasjc.model.Bicicleta;
+
 public class ListaBicicletasAdapter extends ArrayAdapter<Bicicleta> {
 
     public ListaBicicletasAdapter(@NonNull Context context, ArrayList<Bicicleta> listaBicicletas) {
@@ -32,7 +34,7 @@ public class ListaBicicletasAdapter extends ArrayAdapter<Bicicleta> {
 
 
         nomeBicicleta.setText(bicicleta.getNome().toString());
-        nomeEstacaoPertencente.setText( bicicleta.getEstacaoPertencente().toString()  );
+        nomeEstacaoPertencente.setText( bicicleta.getEstacao().getNome()  );
 
         return convertView;
     }

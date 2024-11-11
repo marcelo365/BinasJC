@@ -65,7 +65,7 @@
                     app:srcCompat="@drawable/account_icon" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/nomeUsuarioVisualizarEstacao"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -93,7 +93,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/nomeBicicleta"
+                android:id="@+id/nomeEstacaoVisualizarEstacao"
                 android:layout_width="38dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

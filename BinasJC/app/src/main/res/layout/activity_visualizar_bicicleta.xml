@@ -65,7 +65,7 @@
                     app:srcCompat="@drawable/account_icon" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/nomeUsuarioVisualizarBicicleta"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -128,7 +128,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/pontosAcumulados"
+                    android:id="@+id/disponibilidade"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -155,7 +155,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/nomeEstacao"
+                    android:id="@+id/nomeEstacaoVisualizarBicicleta"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

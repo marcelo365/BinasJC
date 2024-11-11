@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import ao.co.isptec.aplm.binasjc.model.Estacao;
+
 public class ListaEstacoesAdapter extends ArrayAdapter<Estacao> {
 
 
@@ -33,9 +35,17 @@ public class ListaEstacoesAdapter extends ArrayAdapter<Estacao> {
         TextView distancia = convertView.findViewById(R.id.distancia);
 
         nomeEstacao.setText(estacao.getNome().toString());
-        bicicletasDisponiveis.setText( String.valueOf(estacao.getBicicletasDisponiveis())  );
-        distancia.setText( String.valueOf(estacao.getLocalizacao()) );
+
+        estacao.getBicicletasDisponiveis(new Estacao.BicicletaCallback() {
+            @Override
+            public void onBicicletasDisponiveis(int count) {
+                bicicletasDisponiveis.setText(String.valueOf(count));
+            }
+        });
+
+        distancia.setText("677 km");
 
         return convertView;
     }
+
 }

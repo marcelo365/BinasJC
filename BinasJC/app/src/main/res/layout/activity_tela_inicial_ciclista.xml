@@ -37,7 +37,7 @@
                     app:srcCompat="@drawable/account_icon" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/nomeUsuario"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -82,12 +82,14 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/pesquisarBtn"
                 android:layout_width="175dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/white"
-                app:srcCompat="@drawable/search_icon" />
+                app:srcCompat="@drawable/search_icon"
+                android:onClick="efectuarPesquisa"
+                />
 
             <EditText
                 android:id="@+id/searchInput"

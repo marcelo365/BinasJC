@@ -37,7 +37,7 @@
                     app:srcCompat="@drawable/account_icon" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/nomeUsuarioVisualizarCiclistaMapa"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -90,7 +90,7 @@
                 app:srcCompat="@drawable/search_icon" />
 
             <EditText
-                android:id="@+id/searchInput"
+                android:id="@+id/searchInputVisualizarCiclistaMapa"
                 android:layout_width="357dp"
                 android:layout_height="match_parent"
                 android:background="@color/white"

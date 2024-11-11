@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,20 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import ao.co.isptec.aplm.binasjc.model.Bicicleta;
+import ao.co.isptec.aplm.binasjc.model.Estacao;
+import ao.co.isptec.aplm.binasjc.model.Utilizador;
+import ao.co.isptec.aplm.binasjc.retrofit.BicicletaApi;
+import ao.co.isptec.aplm.binasjc.retrofit.RetrofitService;
+import ao.co.isptec.aplm.binasjc.retrofit.UtilizadorApi;
+import ao.co.isptec.aplm.binasjc.shared.SharedPreferencesUtil;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class VisualizarEstacao extends AppCompatActivity {
 
@@ -21,6 +36,10 @@ public class VisualizarEstacao extends AppCompatActivity {
     private ArrayList<Bicicleta> listaBicicletas;
     private ListView listaObjectos;
     private TextView nomeEstacao;
+    private RetrofitService retrofitService;
+    private BicicletaApi bicicletaApi;
+    private TextView nomeUsuario;
+    private Utilizador utilizadorActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,30 +53,46 @@ public class VisualizarEstacao extends AppCompatActivity {
         });
 
         Estacao estacao = (Estacao) getIntent().getSerializableExtra("estacao");
+        nomeUsuario = findViewById(R.id.nomeUsuarioVisualizarEstacao);
         listaObjectos = findViewById(R.id.listaTrajectos);
-        nomeEstacao = findViewById(R.id.nomeBicicleta);
+        nomeEstacao = findViewById(R.id.nomeEstacaoVisualizarEstacao);
         nomeEstacao.setText(estacao.getNome().toString());
+        retrofitService = new RetrofitService();
+        bicicletaApi = retrofitService.getRetrofit().create(BicicletaApi.class);
 
+        utilizadorActual = SharedPreferencesUtil.getUtilizador(getApplicationContext());
+        if (utilizadorActual != null) {
+            nomeUsuario.setText(utilizadorActual.getUsername());
+        }
 
-        listaBicicletas = new ArrayList<>();
-        listaBicicletas.add(new Bicicleta("BMX-270" , "Andromeda"));
-        listaBicicletas.add(new Bicicleta("Track 90-0" , "Andromeda"));
-        listaBicicletas.add(new Bicicleta("Bib 89-98" , "Andromeda"));
-        ListaBicicletasAdapter adapter = new ListaBicicletasAdapter(VisualizarEstacao.this , listaBicicletas);
-        listaObjectos.setAdapter(adapter);
-
-
-        listaObjectos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        bicicletaApi.getBicicletaByEstacao(estacao).enqueue(new Callback<List<Bicicleta>>() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(VisualizarEstacao.this , VisualizarBicicleta.class);
-                intent.putExtra("bicicleta", listaBicicletas.get(position));
-                startActivity(intent);
+            public void onResponse(Call<List<Bicicleta>> call, Response<List<Bicicleta>> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+
+                    listaBicicletas = new ArrayList<>(response.body());
+                    ListaBicicletasAdapter adapter = new ListaBicicletasAdapter(VisualizarEstacao.this, listaBicicletas);
+                    listaObjectos.setAdapter(adapter);
+
+
+                    listaObjectos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent(VisualizarEstacao.this, VisualizarBicicleta.class);
+                            intent.putExtra("bicicleta", listaBicicletas.get(position));
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Bicicleta>> call, Throwable throwable) {
+                Toast.makeText(VisualizarEstacao.this, "Erro de rede listar bicicletas visualizar estacao", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(VisualizarEstacao.class.getName()).log(Level.SEVERE, "Error ocurred", throwable);
             }
         });
-
-
-
 
     }
 

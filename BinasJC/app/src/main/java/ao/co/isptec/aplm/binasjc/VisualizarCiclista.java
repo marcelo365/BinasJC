@@ -10,9 +10,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import ao.co.isptec.aplm.binasjc.model.Utilizador;
+import ao.co.isptec.aplm.binasjc.shared.SharedPreferencesUtil;
+
 public class VisualizarCiclista extends AppCompatActivity {
 
-
+    private TextView nomeUsuario;
+    private Utilizador utilizadorActual;
     private TextView nomeCiclista;
 
     @Override
@@ -26,9 +30,15 @@ public class VisualizarCiclista extends AppCompatActivity {
             return insets;
         });
 
-        Usuario usuario = (Usuario) getIntent().getSerializableExtra("ciclista");
-        nomeCiclista = findViewById(R.id.ciclista);
-        nomeCiclista.setText(usuario.getNome());
+        Utilizador usuario = (Utilizador) getIntent().getSerializableExtra("ciclista");
+        nomeUsuario = findViewById(R.id.nomeUsuarioVisualizarCiclista);
+        nomeCiclista = findViewById(R.id.nomeCiclista);
+        nomeCiclista.setText(usuario.getNomecompleto());
+
+        utilizadorActual = SharedPreferencesUtil.getUtilizador(getApplicationContext());
+        if (utilizadorActual != null) {
+            nomeUsuario.setText(utilizadorActual.getUsername());
+        }
 
     }
 

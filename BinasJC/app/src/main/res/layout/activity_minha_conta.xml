@@ -65,7 +65,7 @@
                     app:srcCompat="@drawable/account_icon" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/nomeUsuarioMinhaConta"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
