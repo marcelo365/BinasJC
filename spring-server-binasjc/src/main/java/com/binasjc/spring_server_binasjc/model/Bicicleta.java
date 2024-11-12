@@ -18,7 +18,7 @@ public class Bicicleta {
     private int disponibilidade; // 0 - não disponivel , 1 disponivel
 
     @ManyToOne
-    @JoinColumn(name = "id_estacao")
+    @JoinColumn(name = "id_estacao" , nullable = false)
     private Estacao estacao; // Associa uma Estacao à Bicicleta
 
     public int getId() {

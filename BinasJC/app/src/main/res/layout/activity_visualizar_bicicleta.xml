@@ -84,7 +84,7 @@
 
             <TextView
                 android:id="@+id/ciclista"
-                android:layout_width="41dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/white"
@@ -95,7 +95,7 @@
 
             <TextView
                 android:id="@+id/nomeBicicleta"
-                android:layout_width="38dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/white"
@@ -172,13 +172,16 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/reservarCancelarBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="37dp"
                     android:background="@drawable/button_border"
                     android:padding="20px"
                     android:text="Reservar"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:onClick="reservarBicicleta"
+                    />
             </LinearLayout>
 
         </LinearLayout>

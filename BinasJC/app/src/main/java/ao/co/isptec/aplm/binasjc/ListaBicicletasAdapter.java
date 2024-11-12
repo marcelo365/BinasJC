@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,13 @@ public class ListaBicicletasAdapter extends ArrayAdapter<Bicicleta> {
 
         TextView nomeBicicleta = convertView.findViewById(R.id.nomeCiclista);
         TextView nomeEstacaoPertencente = convertView.findViewById(R.id.estacaoBicicleta);
+        TextView disponibilidade = convertView.findViewById(R.id.disponibilidadeListaBicicletas);
 
+        if(bicicleta.getDisponibilidade() == 0){
+            disponibilidade.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.vermelho));
+        }else{
+            disponibilidade.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.verde));
+        }
 
         nomeBicicleta.setText(bicicleta.getNome().toString());
         nomeEstacaoPertencente.setText( bicicleta.getEstacao().getNome()  );

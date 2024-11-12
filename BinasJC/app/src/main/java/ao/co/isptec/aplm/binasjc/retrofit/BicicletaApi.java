@@ -9,6 +9,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface BicicletaApi {
@@ -23,10 +24,10 @@ public interface BicicletaApi {
     Call<Bicicleta> getBicicletaByID(@Query("id") int id);
 
     @GET("/Bicicleta/getBicicletaByEstacao")
-    Call<List<Bicicleta>> getBicicletaByEstacao(@Body Estacao estacao);
+    Call<List<Bicicleta>> getBicicletaByEstacao(@Query("idEstacao") int idEstacao);
 
     @GET("/Bicicleta/getBicicletasDisponiveisEstacao")
-    Call<List<Bicicleta>> getBicicletasDisponiveisEstacao(@Body Estacao estacao);
+    Call<List<Bicicleta>> getBicicletasDisponiveisEstacao(@Query("idEstacao") int idEstacao);
 
     @POST("/Bicicleta/save")
     Call<Bicicleta> save(@Body Bicicleta bicicleta);

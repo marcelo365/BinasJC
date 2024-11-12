@@ -57,12 +57,13 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/enviarPontosBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="30px"
-                app:srcCompat="@drawable/send_icon" />
+                app:srcCompat="@drawable/send_icon"
+                />
 
             <ImageView
                 android:id="@+id/imageView7"

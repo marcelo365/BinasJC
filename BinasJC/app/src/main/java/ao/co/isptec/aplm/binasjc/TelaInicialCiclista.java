@@ -1,5 +1,6 @@
 package ao.co.isptec.aplm.binasjc;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
@@ -56,6 +59,9 @@ public class TelaInicialCiclista extends AppCompatActivity {
     private EstacaoApi estacaoApi;
     private BicicletaApi bicicletaApi;
     private int tipoPesquisa; // 0 - pesquisa de estações , 1 - pesquisa de bicicletas , 2 - pesquisa de ciclistas
+    private ActivityResultLauncher<Intent> activityResultLauncher;
+    private ActivityResultLauncher<Intent> activityResultLauncherEstacoes;
+
 
 
     @Override
@@ -98,6 +104,24 @@ public class TelaInicialCiclista extends AppCompatActivity {
 
         irEstacoes(null);
         tipoPesquisa = 0;
+
+        activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        irBicicletas(null);
+                    }
+                }
+        );
+
+        activityResultLauncherEstacoes = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        irEstacoes(null);
+                    }
+                }
+        );
     }
 
     public void irEstacoes(View view) {
@@ -118,7 +142,7 @@ public class TelaInicialCiclista extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Intent intent = new Intent(TelaInicialCiclista.this, VisualizarEstacao.class);
                             intent.putExtra("estacao", listaEstacoes.get(position));
-                            startActivity(intent);
+                            activityResultLauncherEstacoes.launch(intent);
                         }
                     });
 
@@ -161,10 +185,10 @@ public class TelaInicialCiclista extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Intent intent = new Intent(TelaInicialCiclista.this, VisualizarBicicleta.class);
                             intent.putExtra("bicicleta", listaBicicletas.get(position));
-                            startActivity(intent);
+                            //startActivity(intent);
+                            activityResultLauncher.launch(intent);
                         }
                     });
-
                 }
             }
 
@@ -248,18 +272,22 @@ public class TelaInicialCiclista extends AppCompatActivity {
 
                             if (response.isSuccessful() && response.body() != null) {
 
-                                listaEstacoes = new ArrayList<>(response.body());
-                                ListaEstacoesAdapter adapter = new ListaEstacoesAdapter(TelaInicialCiclista.this, listaEstacoes);
-                                listaObjectos.setAdapter(adapter);
+                                if (!response.body().isEmpty()) {
+                                    listaEstacoes = new ArrayList<>(response.body());
+                                    ListaEstacoesAdapter adapter = new ListaEstacoesAdapter(TelaInicialCiclista.this, listaEstacoes);
+                                    listaObjectos.setAdapter(adapter);
 
-                                listaObjectos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Intent intent = new Intent(TelaInicialCiclista.this, VisualizarEstacao.class);
-                                        intent.putExtra("estacao", listaEstacoes.get(position));
-                                        startActivity(intent);
-                                    }
-                                });
+                                    listaObjectos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                            Intent intent = new Intent(TelaInicialCiclista.this, VisualizarEstacao.class);
+                                            intent.putExtra("estacao", listaEstacoes.get(position));
+                                            startActivity(intent);
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(TelaInicialCiclista.this, "Nenhuma estação encontrada com esse nome", Toast.LENGTH_SHORT).show();
+                                }
 
 
                             } else {
@@ -286,18 +314,23 @@ public class TelaInicialCiclista extends AppCompatActivity {
 
                             if (response.isSuccessful() && response.body() != null) {
 
-                                listaBicicletas = new ArrayList<>(response.body());
-                                ListaBicicletasAdapter adapter = new ListaBicicletasAdapter(TelaInicialCiclista.this, listaBicicletas);
-                                listaObjectos.setAdapter(adapter);
+                                if (!response.body().isEmpty()) {
+                                    listaBicicletas = new ArrayList<>(response.body());
+                                    ListaBicicletasAdapter adapter = new ListaBicicletasAdapter(TelaInicialCiclista.this, listaBicicletas);
+                                    listaObjectos.setAdapter(adapter);
 
-                                listaObjectos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Intent intent = new Intent(TelaInicialCiclista.this, VisualizarBicicleta.class);
-                                        intent.putExtra("bicicleta", listaBicicletas.get(position));
-                                        startActivity(intent);
-                                    }
-                                });
+                                    listaObjectos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                            Intent intent = new Intent(TelaInicialCiclista.this, VisualizarBicicleta.class);
+                                            intent.putExtra("bicicleta", listaBicicletas.get(position));
+                                            startActivity(intent);
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(TelaInicialCiclista.this, "Nenhuma bicicleta encontrada com esse nome", Toast.LENGTH_SHORT).show();
+                                }
+
                             }
                         }
 

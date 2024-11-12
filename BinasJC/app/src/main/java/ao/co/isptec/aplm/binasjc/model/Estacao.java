@@ -21,6 +21,8 @@ public class Estacao implements Serializable {
 
     private int id;
     private String nome;
+    private double latitude;
+    private double longitude;
 
     public Estacao() {
 
@@ -46,39 +48,29 @@ public class Estacao implements Serializable {
         this.nome = nome;
     }
 
-    public void getBicicletasDisponiveis(final BicicletaCallback callback) {
+    public double getLatitude() {
+        return latitude;
+    }
 
-        RetrofitService retrofitService = new RetrofitService();
-        BicicletaApi bicicletaApi = retrofitService.getRetrofit().create(BicicletaApi.class);
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
 
-        bicicletaApi.getBicicletasDisponiveisEstacao(this).enqueue(new Callback<List<Bicicleta>>() {
-            @Override
-            public void onResponse(Call<List<Bicicleta>> call, Response<List<Bicicleta>> response) {
+    public double getLongitude() {
+        return longitude;
+    }
 
-                if (response.isSuccessful() && response.body() != null) {
-                    int size = response.body().size();
-                    callback.onBicicletasDisponiveis(size);
-                }else{
-                    Log.e("Erro", "Resposta não bem-sucedida");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Bicicleta>> call, Throwable throwable) {
-                Log.d("Erro de rede ao pegar bicicletas disponveis de uma estação", "Falha na requisição: " + throwable.getMessage(), throwable);
-            }
-        });
-
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     @Override
     public String toString() {
-        return "Estacao [id=" + id + ", nome=" + nome + "]";
+        return "Estacao{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
     }
-
-
-    public interface BicicletaCallback {
-        void onBicicletasDisponiveis(int count);
-    }
-
 }

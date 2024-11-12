@@ -87,7 +87,6 @@ public class VisualizarCiclistasMapa extends AppCompatActivity {
             }
         });
 
-
     }
 
     public void irVisualizarMapa(View view) {
@@ -113,20 +112,22 @@ public class VisualizarCiclistasMapa extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
                         listaCiclistas = new ArrayList<>();
                         listaCiclistas.add(response.body());
-                        ListaCiclistasAdapter adapter = new ListaCiclistasAdapter(VisualizarCiclistasMapa.this, listaCiclistas);
+                        ListaCiclistasMapaAdapter adapter = new ListaCiclistasMapaAdapter(VisualizarCiclistasMapa.this, listaCiclistas);
                         listaObjectosCiclistas.setAdapter(adapter);
+
+                        listaObjectosCiclistas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                //Intent intent = new Intent(VisualizarCiclistasMapa.this, VisualizarCiclista.class);
+                                //intent.putExtra("ciclista", listaCiclistas.get(position));
+                                //startActivity(intent);
+                            }
+                        });
+
                     } else {
                         Toast.makeText(VisualizarCiclistasMapa.this, "Nenhum ciclista encontrado com esse username", Toast.LENGTH_SHORT).show();
                     }
 
-                    listaObjectosCiclistas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent = new Intent(VisualizarCiclistasMapa.this, VisualizarCiclista.class);
-                            intent.putExtra("ciclista", listaCiclistas.get(position));
-                            startActivity(intent);
-                        }
-                    });
 
                 }
 

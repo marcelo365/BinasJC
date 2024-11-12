@@ -87,7 +87,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/white"
-                app:srcCompat="@drawable/search_icon" />
+                app:srcCompat="@drawable/search_icon"
+                android:onClick="efectuarPesquisa"
+                />
 
             <EditText
                 android:id="@+id/searchInputVisualizarCiclistaMapa"

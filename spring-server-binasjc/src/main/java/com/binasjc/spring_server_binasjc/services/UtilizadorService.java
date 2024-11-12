@@ -26,6 +26,7 @@ public class UtilizadorService {
         repository.delete(utilizador);
     }
 
+
     public Utilizador findByUserName(String username) {
         return repository.findByUsername(username);
     }

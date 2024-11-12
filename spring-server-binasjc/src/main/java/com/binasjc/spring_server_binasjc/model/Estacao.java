@@ -12,6 +12,8 @@ public class Estacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
+    private double latitude;
+    private double longitude;
 
     public Estacao() {
 
@@ -37,11 +39,25 @@ public class Estacao {
         this.nome = nome;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
     @Override
     public String toString() {
         return "Estacao [id=" + id + ", nome=" + nome + "]";
     }
 
-    
-    
 }

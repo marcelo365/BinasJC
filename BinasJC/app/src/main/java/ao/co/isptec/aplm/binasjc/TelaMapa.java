@@ -3,6 +3,7 @@ package ao.co.isptec.aplm.binasjc;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,9 +17,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
+import ao.co.isptec.aplm.binasjc.model.Utilizador;
+import ao.co.isptec.aplm.binasjc.shared.SharedPreferencesUtil;
+
 public class TelaMapa extends AppCompatActivity implements OnMapReadyCallback {
 
     private SupportMapFragment mapFragment;
+    private TextView nomeUsuario;
+    private Utilizador utilizadorActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,12 @@ public class TelaMapa extends AppCompatActivity implements OnMapReadyCallback {
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
+        nomeUsuario = findViewById(R.id.nomeUsuarioTelaMapa);
+
+        utilizadorActual = SharedPreferencesUtil.getUtilizador(getApplicationContext());
+        if (utilizadorActual != null) {
+            nomeUsuario.setText(utilizadorActual.getUsername());
+        }
 
 
     }

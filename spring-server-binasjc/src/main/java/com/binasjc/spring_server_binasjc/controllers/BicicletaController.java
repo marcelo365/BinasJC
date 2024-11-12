@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.binasjc.spring_server_binasjc.model.Bicicleta;
-import com.binasjc.spring_server_binasjc.model.Estacao;
 import com.binasjc.spring_server_binasjc.services.BicicletaService;
+
 
 @RestController
 @RequestMapping("/Bicicleta")
@@ -48,8 +48,8 @@ public class BicicletaController {
     }
 
     @GetMapping("/getBicicletaByEstacao")
-    public List<Bicicleta> getBicicletaByEstacao(@RequestBody Estacao estacao) {
-        return bicicletaService.findByEstacao(estacao);
+    public List<Bicicleta> getBicicletaByEstacao(@RequestParam int idEstacao) {
+        return bicicletaService.findByIdEstacao(idEstacao);
     }
 
     @GetMapping("/getBicicletaByNome")
@@ -58,8 +58,8 @@ public class BicicletaController {
     }
 
     @GetMapping("/getBicicletasDisponiveisEstacao")
-    public List<Bicicleta> getBicicletasDisponiveisEstacao(@RequestBody Estacao estacao) {
-        return bicicletaService.getBicicletasDisponiveisEstacao(estacao);
+    public List<Bicicleta> getBicicletasDisponiveisEstacao(@RequestParam int idEstacao) {
+        return bicicletaService.getBicicletasDisponiveisEstacao(idEstacao);
     }
 
 }

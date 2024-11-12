@@ -142,7 +142,9 @@
                     android:padding="20px"
                     android:text="Enviar Pontos"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:onClick="enviarPontos"
+                    />
             </LinearLayout>
 
         </LinearLayout>
