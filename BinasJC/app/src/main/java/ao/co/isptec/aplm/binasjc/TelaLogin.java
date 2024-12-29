@@ -60,7 +60,7 @@ public class TelaLogin extends AppCompatActivity {
 
 
     public void irUsuario(View view) {
-        Intent intent = new Intent(this, TelaInicialCiclista.class);
+        Intent intent = new Intent(this, TelaMapa.class);
         startActivity(intent);
     }
 
@@ -85,7 +85,8 @@ public class TelaLogin extends AppCompatActivity {
 
                 if (response.isSuccessful() && (response.body() != null)) {
                     SharedPreferencesUtil.saveUtilizador(getApplicationContext() , response.body());
-                    Intent intent = new Intent(TelaLogin.this, TelaInicialCiclista.class);
+
+                    Intent intent = new Intent(TelaLogin.this, TelaMapa.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(TelaLogin.this, "Usuário não encontrado , porfavor verifique a senha ou username", Toast.LENGTH_SHORT).show();

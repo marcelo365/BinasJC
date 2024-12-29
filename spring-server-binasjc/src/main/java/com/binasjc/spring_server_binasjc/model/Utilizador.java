@@ -15,6 +15,7 @@ public class Utilizador {
     private String username;
     private String senha;
     private float pontos;
+    private int idEstacaoReservaBicicleta;
 
     public Utilizador() {
 
@@ -66,10 +67,21 @@ public class Utilizador {
         this.pontos = pontos;
     }
 
+    public int getIdEstacaoReservaBicicleta() {
+        return idEstacaoReservaBicicleta;
+    }
+
+    public void setIdEstacaoReservaBicicleta(int idEstacaoReservaBicicleta) {
+        this.idEstacaoReservaBicicleta = idEstacaoReservaBicicleta;
+    }
+    
+
     @Override
     public String toString() {
         return "Utilizador [id=" + id + ", nomecompleto=" + nomecompleto + ", username=" + username + ", senha=" + senha
                 + "]";
     }
+
+
 
 }

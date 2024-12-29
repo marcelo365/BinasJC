@@ -129,7 +129,6 @@ public class TelaRegisto extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void verificarUsuarioExistente(String username, VerificacaoUsuarioCallback callback) {

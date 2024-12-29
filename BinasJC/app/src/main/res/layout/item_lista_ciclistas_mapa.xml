@@ -54,26 +54,7 @@
             android:layout_width="104dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/enviarPontosBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="30px"
-                app:srcCompat="@drawable/send_icon"
-                />
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="irTelaMensagens"
-                android:padding="30px"
-                app:srcCompat="@drawable/message_icon" />
-        </LinearLayout>
+            android:orientation="horizontal"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

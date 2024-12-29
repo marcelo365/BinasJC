@@ -1,21 +1,6 @@
 package ao.co.isptec.aplm.binasjc.model;
 
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import ao.co.isptec.aplm.binasjc.MainActivity;
-import ao.co.isptec.aplm.binasjc.retrofit.BicicletaApi;
-import ao.co.isptec.aplm.binasjc.retrofit.RetrofitService;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Estacao implements Serializable {
 
@@ -23,6 +8,7 @@ public class Estacao implements Serializable {
     private String nome;
     private double latitude;
     private double longitude;
+    private int bicicletasDisponiveis;
 
     public Estacao() {
 
@@ -62,6 +48,14 @@ public class Estacao implements Serializable {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public int getBicicletasDisponiveis() {
+        return bicicletasDisponiveis;
+    }
+
+    public void setBicicletasDisponiveis(int bicicletasDisponiveis) {
+        this.bicicletasDisponiveis = bicicletasDisponiveis;
     }
 
     @Override

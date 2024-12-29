@@ -121,10 +121,24 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingLeft="40px"
-                    android:text="500"
+                    android:text="0"
                     android:textSize="16sp" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150px">
+
+                <Button
+                    android:id="@+id/iniTraj"
+                    android:layout_width="316dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Iniciar trajecto"></Button>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

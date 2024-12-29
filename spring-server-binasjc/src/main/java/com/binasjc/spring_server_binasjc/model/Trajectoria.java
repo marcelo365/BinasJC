@@ -6,69 +6,47 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Estacao {
+public class Trajectoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nome;
+    private int idTrajectoria;
+    private int idUsuario;
     private double latitude;
     private double longitude;
-    private int bicicletasDisponiveis;
     
-
-    public Estacao() {
-    }
-
-    public Estacao(String nome) {
-        this.nome = nome;
-    }
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
-    public String getNome() {
-        return nome;
+    public int getIdTrajectoria() {
+        return idTrajectoria;
     }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setIdTrajectoria(int idTrajectoria) {
+        this.idTrajectoria = idTrajectoria;
     }
-
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
     public double getLatitude() {
         return latitude;
     }
-
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
-
     public double getLongitude() {
         return longitude;
     }
-
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
     
-
-    @Override
-    public String toString() {
-        return "Estacao [id=" + id + ", nome=" + nome + "]";
-    }
-
-    public int getBicicletasDisponiveis() {
-        return bicicletasDisponiveis;
-    }
-
-    public void setBicicletasDisponiveis(int bicicletasDisponiveis) {
-        this.bicicletasDisponiveis = bicicletasDisponiveis;
-    }
-
+    
 }

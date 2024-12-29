@@ -23,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
 
         });
+
+        // Iniciar o serviço
+        Intent intent1 = new Intent(getApplicationContext(), WifiService.class);
+        startService(intent1);
+
     }
 
     public void ir(View view){

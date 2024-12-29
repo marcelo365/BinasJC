@@ -15,9 +15,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.BinasJC"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <service
+            android:name=".WifiService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".TelaMensagens"
             android:exported="false" />
@@ -32,18 +37,6 @@
             android:exported="false" />
         <activity
             android:name=".MinhaConta"
-            android:exported="false" />
-        <activity
-            android:name=".VisualizarCiclista"
-            android:exported="false" />
-        <activity
-            android:name=".VisualizarBicicleta"
-            android:exported="false" />
-        <activity
-            android:name=".VisualizarEstacao"
-            android:exported="false" />
-        <activity
-            android:name=".TelaInicialCiclista"
             android:exported="false" />
         <activity
             android:name=".TelaRegisto"
@@ -63,7 +56,9 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBp9KIKPR68dSHBma_AWlBRBu5c8G0HDvg" />
+            android:value="AIzaSyDGVQQ_SC9ACNbgyoeLMcy9w4GW1cy6ELA" />
+
+        <service android:name="pt.inesc.termite.wifidirect.service.SimWifiP2pService" />
     </application>
 
 </manifest>

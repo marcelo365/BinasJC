@@ -12,26 +12,28 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class ListaTrajectoriasAdapter extends ArrayAdapter<Trajectoria> {
-    public ListaTrajectoriasAdapter(@NonNull Context context, ArrayList<Trajectoria> listaTrajectorias) {
-        super(context, R.layout.item_historico_trajectorias, listaTrajectorias);
+import ao.co.isptec.aplm.binasjc.model.Trajectoria;
+
+public class ListaTrajectoriasAdapter extends ArrayAdapter<String> {
+    public ListaTrajectoriasAdapter(@NonNull Context context, ArrayList<String> listaTrajectoriasDistancias) {
+        super(context, R.layout.item_historico_trajectorias, listaTrajectoriasDistancias);
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Trajectoria trajectoria = getItem(position);
+        String trajectoriaDistancia = getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_historico_trajectorias, parent, false);
         }
 
-        TextView dataTrajectoria = convertView.findViewById(R.id.dataTrajectoria);
+        TextView numeroTrajecto = convertView.findViewById(R.id.numeroTrajecto);
         TextView distanciaPercorrida = convertView.findViewById(R.id.distanciaPercorrida);
 
 
-        dataTrajectoria.setText(trajectoria.getData().toString());
-        distanciaPercorrida.setText(String.valueOf(trajectoria.getDistanciaPercorrida()));
+        numeroTrajecto.setText("Trajecto " + (position+1) );
+        distanciaPercorrida.setText(trajectoriaDistancia + " m");
 
         return convertView;
     }

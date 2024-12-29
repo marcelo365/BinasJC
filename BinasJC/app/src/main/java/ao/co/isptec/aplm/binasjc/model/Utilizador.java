@@ -8,7 +8,8 @@ public class Utilizador implements Serializable {
     private String nomecompleto;
     private String username;
     private String senha;
-    private float pontos;
+    private double pontos;
+    private int idEstacaoReservaBicicleta;
 
     public Utilizador() {
 
@@ -52,12 +53,20 @@ public class Utilizador implements Serializable {
         this.senha = senha;
     }
 
-    public float getPontos() {
+    public double getPontos() {
         return pontos;
     }
 
-    public void setPontos(float pontos) {
+    public void setPontos(double pontos) {
         this.pontos = pontos;
+    }
+
+    public int getIdEstacaoReservaBicicleta() {
+        return idEstacaoReservaBicicleta;
+    }
+
+    public void setIdEstacaoReservaBicicleta(int idEstacaoReservaBicicleta) {
+        this.idEstacaoReservaBicicleta = idEstacaoReservaBicicleta;
     }
 
     @Override
