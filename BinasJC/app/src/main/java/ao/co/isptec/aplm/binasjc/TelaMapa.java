@@ -289,59 +289,64 @@ public class TelaMapa extends AppCompatActivity implements OnMapReadyCallback, S
             }
         } else {
             if (!existeBicicletaPerto) {
-
-                SharedPreferencesUtil.getUtilizador(TelaMapa.this, new SharedPreferencesUtil.UtilizadorCallback() {
-                    @Override
-                    public void onSuccess(Utilizador utilizador) {
-                        Utilizador utilizadorActualizado = utilizador;
-                        utilizadorActualizado.setIdEstacaoReservaBicicleta(0);
-                        utilizadorActualizado.setPontos(utilizador.getPontos() + Double.parseDouble(pontos.getText().toString()) );
-
-                        utilizadorApi.save(utilizadorActualizado).enqueue(new Callback<Utilizador>() {
-                            @Override
-                            public void onResponse(Call<Utilizador> call, Response<Utilizador> response) {
-
-                                if (response.isSuccessful() && response.body() != null) {
-                                    Toast.makeText(TelaMapa.this, "Usuário depositou a bicicleta com sucesso", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Utilizador> call, Throwable throwable) {
-                                Log.d("Erro", "Erro de rede ao depositar bicicleta");
-                            }
-                        });
-
-                        Estacao estacaoFinal = procurarEstacao(2);
-                        estacaoFinal.setBicicletasDisponiveis(estacaoFinal.getBicicletasDisponiveis() + 1);
-
-                        estacaoApi.save(estacaoFinal).enqueue(new Callback<Estacao>() {
-                            @Override
-                            public void onResponse(Call<Estacao> call, Response<Estacao> response) {
-
-                                if (response.isSuccessful() && response.body() != null) {
-
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Estacao> call, Throwable throwable) {
-                                Toast.makeText(TelaMapa.this, "Erro de rede atualizar estação após depósito", Toast.LENGTH_SHORT).show();
-                                Logger.getLogger(TelaMapa.class.getName()).log(Level.SEVERE, "Error ocurred", throwable);
-                            }
-                        });
-
-                        verificarSeDepositouBicicleta = true;
-
-                    }
-                });
-
-                guardarPontosRecolhidosBD();
-
+                isMapClickEnabled = true;
+                Toast.makeText(mWifiService, "Usuário desconectou-se da bicicleta", Toast.LENGTH_SHORT).show();
             } else {
                 mWifiService.getManager().requestPeers(mWifiService.getmChannel(), TelaMapa.this);
             }
         }
+    }
+
+    private void atualizarInformacoesAposDepositoBicicleta() {
+
+        SharedPreferencesUtil.getUtilizador(TelaMapa.this, new SharedPreferencesUtil.UtilizadorCallback() {
+            @Override
+            public void onSuccess(Utilizador utilizador) {
+                Utilizador utilizadorActualizado = utilizador;
+                utilizadorActualizado.setIdEstacaoReservaBicicleta(0);
+                utilizadorActualizado.setPontos(utilizador.getPontos() + Double.parseDouble(pontos.getText().toString()));
+
+                utilizadorApi.save(utilizadorActualizado).enqueue(new Callback<Utilizador>() {
+                    @Override
+                    public void onResponse(Call<Utilizador> call, Response<Utilizador> response) {
+
+                        if (response.isSuccessful() && response.body() != null) {
+                            Toast.makeText(TelaMapa.this, "Usuário depositou a bicicleta com sucesso", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Utilizador> call, Throwable throwable) {
+                        Log.d("Erro", "Erro de rede ao depositar bicicleta");
+                    }
+                });
+
+                Estacao estacaoFinal = procurarEstacao(2);
+                estacaoFinal.setBicicletasDisponiveis(estacaoFinal.getBicicletasDisponiveis() + 1);
+
+                estacaoApi.save(estacaoFinal).enqueue(new Callback<Estacao>() {
+                    @Override
+                    public void onResponse(Call<Estacao> call, Response<Estacao> response) {
+
+                        if (response.isSuccessful() && response.body() != null) {
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Estacao> call, Throwable throwable) {
+                        Toast.makeText(TelaMapa.this, "Erro de rede atualizar estação após depósito", Toast.LENGTH_SHORT).show();
+                        Logger.getLogger(TelaMapa.class.getName()).log(Level.SEVERE, "Error ocurred", throwable);
+                    }
+                });
+
+                verificarSeDepositouBicicleta = true;
+
+            }
+        });
+
+        guardarPontosRecolhidosBD();
+
     }
 
     @Override
@@ -356,22 +361,33 @@ public class TelaMapa extends AppCompatActivity implements OnMapReadyCallback, S
             @Override
             public void onMapClick(LatLng latLng) {
                 if (isMapClickEnabled) { // Verifica se o listener está habilitado
-                    // Move o marcador para a posição clicada
-                    verificarEstacaoPartidaDestino = false;
                     marcadorVerde.setPosition(latLng);
-                    if (verificarSeEncontraDentroDoRaioEstacao(1)) {
-                        Toast.makeText(TelaMapa.this, "Dentro do raio de 100 metros da estação de partida", Toast.LENGTH_SHORT).show();
 
-                        SharedPreferencesUtil.getUtilizador(TelaMapa.this, new SharedPreferencesUtil.UtilizadorCallback() {
-                            @Override
-                            public void onSuccess(Utilizador utilizador) {
-                                if (utilizador.getIdEstacaoReservaBicicleta() == 1) {
-                                    mWifiService.getManager().requestPeers(mWifiService.getmChannel(), TelaMapa.this); //pedir a lista de dispositivos mais próximos
+                    if (verificarEstacaoPartidaDestino == false) {
+                        // Move o marcador para a posição clicada
+                        verificarEstacaoPartidaDestino = false;
+                        if (verificarSeEncontraDentroDoRaioEstacao(1)) {
+                            Toast.makeText(TelaMapa.this, "Dentro do raio de 100 metros da estação de partida", Toast.LENGTH_SHORT).show();
+
+                            SharedPreferencesUtil.getUtilizador(TelaMapa.this, new SharedPreferencesUtil.UtilizadorCallback() {
+                                @Override
+                                public void onSuccess(Utilizador utilizador) {
+                                    if (utilizador.getIdEstacaoReservaBicicleta() == 1) {
+                                        mWifiService.getManager().requestPeers(mWifiService.getmChannel(), TelaMapa.this); //pedir a lista de dispositivos mais próximos
+                                    }
                                 }
-                            }
-                        });
-                    }
+                            });
+                        }
+                    } else {
 
+                        if (verificarSeEncontraDentroDoRaioEstacao(2)) {
+                            Toast.makeText(TelaMapa.this, "Dentro do raio de 100 metros da estação de destino", Toast.LENGTH_SHORT).show();
+                        } else {
+                            atualizarInformacoesAposDepositoBicicleta();
+                            isMapClickEnabled = false;
+                        }
+
+                    }
 
                 }
             }
